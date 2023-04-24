@@ -2,7 +2,7 @@ from django.db import models
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(unique=True, max_length=18)
+    vin = models.CharField(unique=True, max_length=17)
 
 
 class Salesperson(models.Model):
@@ -26,12 +26,12 @@ class Sale(models.Model):
     )
     salesperson = models.ForeignKey(
         Salesperson,
-        related_name='sale',
+        related_name="sale",
         on_delete=models.PROTECT,
     )
     customer = models.ForeignKey(
         Customer,
-        related_name='sale',
+        related_name="sale",
         on_delete=models.PROTECT,
     )
     price = models.DecimalField(max_digits=8, decimal_places=2)

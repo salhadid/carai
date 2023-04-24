@@ -14,23 +14,22 @@ from sales_rest.models import AutomobileVO
 
 
 def get_automobiles():
-    response = requests.get("http://localhost:8100/api/automobiles/")
+    response = requests.get("http://project-beta-inventory-api-1:8100/api/automobiles/")
     content = json.loads(response.content)
-    for automobile in content["automobiles"]:
+    for automobile in content["autos"]:
         AutomobileVO.objects.update_or_create(
-            import_vin=automobile["vin"],
+            vin=automobile["vin"],
             defaults={
                 "vin": automobile["vin"],
-            }
+            },
         )
 
 
 def poll():
     while True:
-        print('Sales poller polling for data')
+        print("Sales poller polling for data")
         try:
             get_automobiles()
-            pass
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)
