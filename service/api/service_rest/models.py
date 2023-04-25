@@ -2,17 +2,8 @@ from django.db import models
 from django.urls import reverse
 
 
-class CustomerVO(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-
-    # this might need changed or removed
-
-
 class AutomobileVO(models.Model):
     vin = models.CharField(max_length=17, unique=True)
-
-    # need this to determine if vip
 
 
 class Technician(models.Model):
@@ -36,6 +27,7 @@ class Status(models.Model):
     direct URL to view it.
     """
 
+    id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
@@ -49,7 +41,19 @@ class Status(models.Model):
 class Appointment(models.Model):
     @classmethod
     def create(cls, **kwargs):
+        # set status
         kwargs["status"] = Status.objects.get(name="CREATED")
+
+        # get vip status
+        inventory_vins = AutomobileVO.objects.all()
+        vins = [inv_vin.vin for inv_vin in inventory_vins]
+        service_vin = kwargs["vin"]
+        if service_vin in vins:
+            kwargs["vip_status"] = True
+        else:
+            kwargs["vip_status"] = False
+
+        # create the appointment
         appointment = cls(**kwargs)
         appointment.save()
         return appointment
@@ -61,6 +65,7 @@ class Appointment(models.Model):
     reason = models.CharField(max_length=200)
     vin = models.CharField(max_length=17, unique=True)
     customer = models.CharField(max_length=200)
+    vip_status = models.BooleanField(default=False)
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
@@ -78,14 +83,6 @@ class Appointment(models.Model):
 
     def get_time(self):
         """Get the time from the date_time attribute in the format HH:mm ss"""
-        pass
-
-    def full_name(self):
-        """Get the first and last name of a person and return in a single string"""
-        pass
-
-    def vip_status(self):
-        """Returns a customer's VIP status based on whether the car was purchased from inventory"""
         pass
 
     def cancel(self):
