@@ -26,7 +26,6 @@ class Status(models.Model):
     direct URL to view it.
     """
 
-    id = models.PositiveSmallIntegerField(primary_key=True)
     name = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
@@ -62,7 +61,9 @@ class Appointment(models.Model):
         CustomerVO, related_name="appointments", on_delete=models.CASCADE
     )
     technician = models.ForeignKey(
-        Technician, related_name="appointments", on_delete=models.PROTECT
+        Technician,
+        related_name="appointments",
+        on_delete=models.PROTECT,
     )
 
     def get_date(self):
@@ -75,6 +76,10 @@ class Appointment(models.Model):
 
     def full_name(self):
         """Get the first and last name of a person and return in a single string"""
+        pass
+
+    def vip_status(self):
+        """Returns a customer's VIP status based on whether the car was purchased from inventory"""
         pass
 
     def cancel(self):
