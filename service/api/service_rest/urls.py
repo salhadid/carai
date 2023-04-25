@@ -21,7 +21,7 @@ urlpatterns = [
         name="api_cancel_appointment",
     ),
     path(
-        "presentations/<int:pk>/finish/",
+        "appointments/<int:pk>/finish/",
         api_finish_appointment,
         name="api_finish_appointment",
     ),
