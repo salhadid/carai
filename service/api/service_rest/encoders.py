@@ -17,8 +17,7 @@ class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "id",
-        "appt_date",
-        "appt_time",
+        "appt_date_time",
         "reason",
         "vin",
         "customer",
