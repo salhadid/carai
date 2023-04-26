@@ -8,6 +8,8 @@ import CustomerList from './CustomerList';
 import SaleForm from './SaleForm';
 import SalesList from './SalesList';
 import SalespersonHistory from './SalespersonHistory';
+import TechnicianList from './TechnicianList';
+import TechnicianForm from './TechnicianForm';
 
 
 function App() {
@@ -30,6 +32,15 @@ function App() {
             <Route path="create" element={<SaleForm />} />
             <Route path="history" element={<SalespersonHistory />} />
           </Route>
+          <Route path="technicians">
+            <Route path="/technicians" element={<TechnicianList></TechnicianList>} />
+            <Route path="create" element={<TechnicianForm />} />
+          </Route>
+          {/* <Route path="appointments">
+            <Route path="/appointments" element={<AppointmentList></AppointmentList>} />
+            <Route path="create" element={<AppointmentForm />} />
+            <Route path="history" element={<AppointmentHistory />} />
+          </Route> */}
         </Routes>
       </div>
     </BrowserRouter>
