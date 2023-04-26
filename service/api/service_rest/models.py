@@ -60,7 +60,8 @@ class Appointment(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    appt_date_time = models.DateTimeField()
+    appt_date = models.DateField()
+    appt_time = models.TimeField()
     reason = models.CharField(max_length=200)
     vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=200)
@@ -75,14 +76,6 @@ class Appointment(models.Model):
         related_name="appointments",
         on_delete=models.PROTECT,
     )
-
-    def get_date(self):
-        """Get the date from the date_time attribute in the format mm/dd/yyyy"""
-        return self.appt_date_time.date()
-
-    def get_time(self):
-        """Get the time from the date_time attribute in the format HH:mm ss"""
-        return self.appt_date_time.time()
 
     def get_vip_status(self):
         """Check to see if the vehicle was purchased from the dealership"""
@@ -108,7 +101,10 @@ class Appointment(models.Model):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return f"{self.vin}-{self.appt_date_time}"
+        return f"{self.vin}-{self.appt_date}-{self.appt_time}"
 
     class Meta:
-        ordering = ("appt_date_time",)
+        ordering = (
+            "appt_date",
+            "appt_time",
+        )

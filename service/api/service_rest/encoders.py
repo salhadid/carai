@@ -17,15 +17,21 @@ class AppointmentEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "id",
-        "appt_date_time",
+        "appt_date",
+        "appt_time",
         "reason",
         "vin",
         "customer",
         "technician",
+        "vip_status",
     ]
     encoders = {
         "technician": TechnicianEncoder(),
     }
 
     def get_extra_data(self, o):
-        return {"status": o.status.name}
+        return {
+            "status": o.status.name,
+            "appt_date": str(o.appt_date),
+            "appt_time": str(o.appt_time),
+        }
