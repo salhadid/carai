@@ -33,7 +33,7 @@ function SalespersonHistory() {
     };
 
     const handleSalespersonChange = (event) => {
-        const value = event.target.value;
+        const value = Number(event.target.value);
         setSelectedSalesperson(value);
     }
 
