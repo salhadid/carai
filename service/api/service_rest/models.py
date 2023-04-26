@@ -108,6 +108,9 @@ class Appointment(models.Model):
     def get_api_url(self):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})
 
+    def __str__(self):
+        return f"{self.vin}-{self.appt_date}-{self.appt_time}"
+
     class Meta:
         ordering = (
             "appt_date",
