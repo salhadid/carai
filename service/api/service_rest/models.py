@@ -63,7 +63,7 @@ class Appointment(models.Model):
     appt_date = models.DateField()
     appt_time = models.TimeField()
     reason = models.CharField(max_length=200)
-    vin = models.CharField(max_length=17, unique=True)
+    vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=200)
     vip_status = models.BooleanField(default=False)
     technician = models.ForeignKey(
