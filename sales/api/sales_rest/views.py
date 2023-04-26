@@ -57,6 +57,7 @@ def api_list_salesperson(request):
         return JsonResponse(
             {"salespeople": salespeople},
             encoder=SalesPersonListEncoder,
+            safe=False,
         )
     else:
         content = json.loads(request.body)
@@ -137,7 +138,8 @@ def api_list_sales(request, automobile_vo_vin=None):
                 status=400,
             )
         try:
-            salesperson = Salesperson.objects.get(employee_id=content["salesperson"])
+            salesperson_id = content["salesperson"]
+            salesperson = Salesperson.objects.get(employee_id=salesperson_id)
             content["salesperson"] = salesperson
         except Salesperson.DoesNotExist:
             return JsonResponse(
@@ -146,7 +148,8 @@ def api_list_sales(request, automobile_vo_vin=None):
             )
 
         try:
-            customer = Customer.objects.get(id=content["customer"])
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
             content["customer"] = customer
         except Customer.DoesNotExist:
             return JsonResponse(
