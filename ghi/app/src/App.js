@@ -10,6 +10,9 @@ import SalesList from './SalesList';
 import SalespersonHistory from './SalespersonHistory';
 import TechnicianList from './TechnicianList';
 import TechnicianForm from './TechnicianForm';
+import AppointmentsList from './AppointmentsList';
+import AppointmentForm from './AppointmentForm';
+import AppointmentsHistory from './AppointmentsHistory';
 
 
 function App() {
@@ -36,11 +39,11 @@ function App() {
             <Route path="/technicians" element={<TechnicianList></TechnicianList>} />
             <Route path="create" element={<TechnicianForm />} />
           </Route>
-          {/* <Route path="appointments">
-            <Route path="/appointments" element={<AppointmentList></AppointmentList>} />
+          <Route path="appointments">
+            <Route path="/appointments" element={<AppointmentsList></AppointmentsList>} />
             <Route path="create" element={<AppointmentForm />} />
-            <Route path="history" element={<AppointmentHistory />} />
-          </Route> */}
+            <Route path="history" element={<AppointmentsHistory />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
