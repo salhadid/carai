@@ -55,10 +55,7 @@ def api_technician(request, pk):
 def api_appointments(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
-        return JsonResponse(
-            {"appointments": appointments},
-            encoder=AppointmentEncoder,
-        )
+        return JsonResponse({"appointments": appointments}, encoder=AppointmentEncoder)
     else:
         content = json.loads(request.body)
         try:
