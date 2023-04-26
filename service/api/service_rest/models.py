@@ -7,9 +7,9 @@ class AutomobileVO(models.Model):
 
 
 class Technician(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    employee_id = models.CharField(max_length=100, unique=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    employee_id = models.CharField(max_length=25, unique=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -44,7 +44,7 @@ class Appointment(models.Model):
         # set status
         kwargs["status"] = Status.objects.get(name="CREATED")
 
-        # get vip status
+        # set vip status
         inventory_vins = AutomobileVO.objects.all()
         vins = [inv_vin.vin for inv_vin in inventory_vins]
         service_vin = kwargs["vin"]
@@ -59,9 +59,9 @@ class Appointment(models.Model):
         return appointment
 
     created = models.DateTimeField(auto_now_add=True)
-    date_time = models.CharField(
-        max_length=25
-    )  # use charfield to test initial endpoints
+    updated = models.DateTimeField(auto_now=True)
+    appt_date = models.DateField()
+    appt_time = models.TimeField()
     reason = models.CharField(max_length=200)
     vin = models.CharField(max_length=17, unique=True)
     customer = models.CharField(max_length=200)
@@ -85,6 +85,16 @@ class Appointment(models.Model):
         """Get the time from the date_time attribute in the format HH:mm ss"""
         pass
 
+    def get_vip_status(self):
+        """Check to see if the vehicle was purchased from the dealership"""
+        inventory_vins = AutomobileVO.objects.all()
+        vins = [inv_vin.vin for inv_vin in inventory_vins]
+        if self.vin in vins:
+            self.vip_status = True
+        else:
+            self.vip_status = False
+        self.save()
+
     def cancel(self):
         status = Status.objects.get(name="CANCELED")
         self.status = status
@@ -98,8 +108,8 @@ class Appointment(models.Model):
     def get_api_url(self):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})
 
-    def __str__(self):
-        return self.vin
-
     class Meta:
-        ordering = ("date_time",)
+        ordering = (
+            "appt_date",
+            "appt_time",
+        )
