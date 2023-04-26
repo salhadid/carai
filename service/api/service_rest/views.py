@@ -8,7 +8,7 @@ from .encoders import (
     AppointmentEncoder,
 )
 
-from .models import AutomobileVO, Technician, Appointment
+from .models import Technician, Appointment
 
 
 # technician views
@@ -85,7 +85,9 @@ def api_appointment(request, pk):
         # GET response for individual technician id
         appointment = get_object_or_404(Appointment, id=pk)
         return JsonResponse(
-            {"appointment": appointment}, encoder=AppointmentEncoder, safe=False
+            {"appointment": appointment},
+            encoder=AppointmentEncoder,
+            safe=False,
         )
 
 
