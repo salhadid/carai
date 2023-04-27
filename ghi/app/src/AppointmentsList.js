@@ -56,7 +56,6 @@ function AppointmentsList() {
         loadAppointments();
     }, []);
 
-
     return (
         <div>
             <h1>Service Appointments</h1>
@@ -74,13 +73,16 @@ function AppointmentsList() {
                 </thead>
                 <tbody>
                     {appointments.map(appt => {
+                        const date = appt.date_time.split('T')[0];
+                        const rawTime = appt.date_time.split('T')[1];
+                        const time = rawTime.split("+")[0];
                         return (
                             <tr key={appt.id}>
                                 <td>{appt.vin}</td>
                                 <td>{appt.vip_status ? 'Yes' : 'No'}</td>
                                 <td>{appt.customer}</td>
-                                <td>{appt.appt_date}</td>
-                                <td>{appt.appt_time}</td>
+                                <td>{date}</td>
+                                <td>{time}</td>
                                 <td>{appt.technician.first_name + " " + appt.technician.last_name}</td>
                                 <td>{appt.reason}</td>
                                 <td><button onClick={() => handleCancelSubmit(appt.id)}>Cancel</button></td>

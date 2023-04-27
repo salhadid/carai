@@ -52,11 +52,9 @@ function AppointmentForm () {
 
     data.vin = vin;
     data.customer = customer;
-    data.appt_date = apptDate;
-    data.appt_time = apptTime;
+    data.date_time = apptDate + " " + apptTime;
     data.technician = selectedTechnician;
     data.reason = reason;
-
 
     const appointmentUrl = 'http://localhost:8080/api/appointments/';
     const fetchConfig = {

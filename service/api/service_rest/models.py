@@ -60,8 +60,7 @@ class Appointment(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    appt_date = models.DateField()
-    appt_time = models.TimeField()
+    date_time = models.DateTimeField()
     reason = models.CharField(max_length=200)
     vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=200)
@@ -101,10 +100,7 @@ class Appointment(models.Model):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return f"{self.vin}-{self.appt_date}-{self.appt_time}"
+        return f"{self.vin}-{self.date_time}"
 
     class Meta:
-        ordering = (
-            "appt_date",
-            "appt_time",
-        )
+        ordering = ("date_time",)
