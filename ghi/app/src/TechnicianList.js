@@ -28,10 +28,9 @@ function TechnicianList() {
         };
 
         const response = await fetch(url, fetchConfig);
-        console.log(response);
         
         if (response.ok) {
-            window.location.reload(false); // TODO: find better way to do this
+            loadTechnicians(); 
         }
     };
 
