@@ -31,7 +31,7 @@ function AppointmentsHistory() {
       });
       setAppointments(newArray);
     } else {
-        console.error(response);
+      console.error(response);
     }
   };
 
