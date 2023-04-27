@@ -9,18 +9,18 @@ function TechnicianForm () {
 
   // event handlers when changes are made to the form inputs
   const handleFirstNameChange = (event) => {
-      const value = event.target.value;
-      setFirstName(value);
+    const value = event.target.value;
+    setFirstName(value);
   }
 
   const handleLastNameChange = (event) => {
-      const value = event.target.value;
-      setLastName(value);
+    const value = event.target.value;
+    setLastName(value);
   }
 
   const handleEmployeeIdChange = (event) => {
-      const value = event.target.value;
-      setEmployeeId(value);
+    const value = event.target.value;
+    setEmployeeId(value);
   }
 
   // handle the data once submitted 
@@ -35,11 +35,11 @@ function TechnicianForm () {
 
     const serviceUrl = 'http://localhost:8080/api/technicians/';
     const fetchConfig = {
-    method: "post",
-    body: JSON.stringify(data),
-    headers: {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
         'Content-Type': 'application/json',
-        }
+      }
     };
 
     const response = await fetch(serviceUrl, fetchConfig);
@@ -49,7 +49,7 @@ function TechnicianForm () {
       setFirstName('');
       setLastName('');
       setEmployeeId('');
-      };
+    };
   };
 
 
