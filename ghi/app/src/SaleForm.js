@@ -56,7 +56,6 @@ function SaleForm() {
         const response = await fetch(saleUrl, fetchConfig);
         if (response.ok) {
             const newSale = await response.json();
-            console.log(newSale)
 
 
             setSelectedSalesperson('');

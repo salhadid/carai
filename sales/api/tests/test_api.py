@@ -39,7 +39,7 @@ class Tests(TransactionTestCase):
 
     ####CUSTOMER ENDPOINTS
     def test_customer_list(self):
-        Customer.objects.create(first_name="first", last_name="last", address="222 22nd Street", phone_number="222-222 2222")
+        Customer.objects.create(first_name="first", last_name="last", address="222 22nd Street", phone_number=222-222 2222)
 
         client = Client()
         response = client.get("/api/customers/")
@@ -55,7 +55,7 @@ class Tests(TransactionTestCase):
             "first_name": "first",
             "last_name": "last",
             "address": "222 22nd Street",
-            "phone_number": "222-222 2222"
+            "phone_number": 222-222 2222
         }
         response = client.post("/api/customers/", json.dumps(body), content_type='application/json')
         data = response.json()
@@ -63,7 +63,7 @@ class Tests(TransactionTestCase):
         self.assertEqual(response.status_code, 200, msg="Did not get a 200 OK for the path projects/")
 
     def test_customer_delete(self):
-        customer = Customer.objects.create(first_name="first", last_name="last", address="222 22nd Street", phone_number="222-222 2222")
+        customer = Customer.objects.create(first_name="first", last_name="last", address="222 22nd Street", phone_number=222-222 2222)
 
         client = Client()
         response = client.delete(f"/api/customers/{customer.id}/")
@@ -75,7 +75,7 @@ class Tests(TransactionTestCase):
     ####SALES ENDPOINTS
     def test_sales_list(self):
         salesperson = Salesperson.objects.create(first_name="first", last_name="last", employee_id=1)
-        customer = Customer.objects.create(first_name="first", last_name="last", address="111 1st Street", phone_number="111-111 1111")
+        customer = Customer.objects.create(first_name="first", last_name="last", address="111 1st Street", phone_number=111-111 1111)
         auto = AutomobileVO.objects.create(vin="1")
         Sale.objects.create(automobile=auto, salesperson=salesperson, customer=customer, price=1000)
 
@@ -89,7 +89,7 @@ class Tests(TransactionTestCase):
 
     def test_sales_create(self):
         salesperson = Salesperson.objects.create(first_name="first", last_name="last", employee_id=2)
-        customer = Customer.objects.create(first_name="first", last_name="last", address="222 2nd Street", phone_number="222-222 2222")
+        customer = Customer.objects.create(first_name="first", last_name="last", address="222 2nd Street", phone_number=222-222 2222)
         auto = AutomobileVO.objects.create(vin="2")
 
         client = Client()
@@ -118,7 +118,7 @@ class Tests(TransactionTestCase):
 
     def test_sale_delete(self):
         salesperson = Salesperson.objects.create(first_name="first", last_name="last", employee_id=3)
-        customer = Customer.objects.create(first_name="first", last_name="last", address="333 3rd Street", phone_number="333-333 3333")
+        customer = Customer.objects.create(first_name="first", last_name="last", address="333 3rd Street", phone_number=333-333 3333)
         auto = AutomobileVO.objects.create(vin="3")
         sale = Sale.objects.create(automobile=auto, salesperson=salesperson, customer=customer, price=1000)
 
