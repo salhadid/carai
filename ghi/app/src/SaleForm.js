@@ -69,7 +69,7 @@ function SaleForm() {
         const automobileUrl = `http://localhost:8100/api/automobiles/${selectedAutomobile}`;
         const automobileFetchConfig = {
             method: "put",
-            body: JSON.stringify(putData.sold=true),
+            body: JSON.stringify(putData.sold = true),
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -131,7 +131,7 @@ function SaleForm() {
                                 <option value="">
                                     Choose an automobile VIN
                                 </option>
-                                {automobiles.map(automobile => {
+                                {automobiles.filter((automobile) => automobile.sold === false).map(automobile => {
                                     return (
                                         <option key={automobile.vin} value={automobile.vin}>
                                             {automobile.vin}
