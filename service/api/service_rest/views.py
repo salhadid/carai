@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
@@ -12,8 +12,6 @@ from .models import Technician, Appointment
 
 
 # technician views
-
-
 @require_http_methods(["GET", "POST"])
 def api_technicians(request):
     if request.method == "GET":
@@ -23,15 +21,16 @@ def api_technicians(request):
             encoder=TechnicianEncoder,
         )
     else:
-        # TODO: add logic here to check/handle employee_id
-        # need a try/except for an IntegrityError
-        content = json.loads(request.body)
-        technician = Technician.objects.create(**content)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianEncoder,
-            safe=False,
-        )
+        try:
+            content = json.loads(request.body)
+            technician = Technician.objects.create(**content)
+            return JsonResponse(
+                technician,
+                encoder=TechnicianEncoder,
+                safe=False,
+            )
+        except:
+            return JsonResponse({"message": "Employee ID already exists."}, status=400)
 
 
 @require_http_methods(["GET", "DELETE"])
@@ -82,7 +81,7 @@ def api_appointment(request, pk):
         message = f"Deleted appointment: {appointment_id} for VIN: {appointment.vin}"
         return JsonResponse({"message": message})
     else:
-        # GET response for individual technician id
+        # GET response for individual appointment id
         appointment = get_object_or_404(Appointment, id=pk)
         return JsonResponse(
             {"appointment": appointment},
