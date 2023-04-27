@@ -43,8 +43,9 @@ function AppointmentsHistory() {
     <div>
       <h1>Service History</h1>
       <div className="search">
-        <form onSubmit={handleSubmit} id="create-search-bar">
-          <input onChange={handleSearchBarChange} value={searchInput} type="text" placeholder="Search by VIN..." className="form-control"/>
+        <form onSubmit={handleSubmit} id="submit-search-bar">
+          <input onChange={handleSearchBarChange} value={searchInput} type="text" placeholder="Search by VIN..." name="search-bar" id="header-search" className="form-control"/>
+          <button type="submit">Search</button>
         </form>
       </div>
       <table className="table table-striped">
