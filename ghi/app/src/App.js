@@ -33,21 +33,13 @@ function App() {
             <Route path="/manufacturers" element={<ManufacturersList></ManufacturersList>} />
             <Route path="create" element={<ManufacturerForm />} />
           </Route>
-
-
-
-
-          <Route path="automobiles">
-            <Route path="/automobiles" element={<AutomobilesList></AutomobilesList>} />
-            <Route path="create" element={<AutomobileForm />} />
-          </Route>
-
-
-
-
           <Route path="models">
             <Route path="/models" element={<VehicleModelList></VehicleModelList>} />
             <Route path="create" element={<VehicleModelForm />} />
+          </Route>
+          <Route path="automobiles">
+            <Route path="/automobiles" element={<AutomobilesList></AutomobilesList>} />
+            <Route path="create" element={<AutomobileForm />} />
           </Route>
           <Route path="salespeople">
             <Route path="/salespeople" element={<SalespeopleList></SalespeopleList>} />
