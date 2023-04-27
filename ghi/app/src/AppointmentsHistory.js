@@ -30,7 +30,6 @@ function AppointmentsHistory() {
                 }
             });
             setAppointments(newArray);
-            console.log(newArray);
         } else {
             console.error(response);
         }
@@ -63,13 +62,16 @@ function AppointmentsHistory() {
             </thead>
             <tbody>
                 {appointments.map(appt => {
+                    const date = appt.date_time.split('T')[0];
+                    const rawTime = appt.date_time.split('T')[1];
+                    const time = rawTime.split("+")[0];
                     return (
                         <tr key={appt.id}>
                             <td>{appt.vin}</td>
                             <td>{appt.vip_status ? 'Yes' : 'No'}</td>
                             <td>{appt.customer}</td>
-                            <td>{appt.appt_date}</td>
-                            <td>{appt.appt_time}</td>
+                            <td>{date}</td>
+                            <td>{time}</td>
                             <td>{appt.technician.first_name + " " + appt.technician.last_name}</td>
                             <td>{appt.reason}</td>
                             <td>{appt.status}</td>
