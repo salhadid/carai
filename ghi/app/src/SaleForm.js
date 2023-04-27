@@ -38,6 +38,7 @@ function SaleForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
+        const putData = {};
 
         data.automobile = selectedAutomobile;
         data.salesperson = selectedSalesperson;
@@ -62,6 +63,20 @@ function SaleForm() {
             setSelectedCustomer('');
             setSelectedAutomobile('');
             setPrice('');
+        }
+
+
+        const automobileUrl = `http://localhost:8100/api/automobiles/${selectedAutomobile}`;
+        const automobileFetchConfig = {
+            method: "put",
+            body: JSON.stringify(putData.sold=true),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        const automobileResponse = await fetch(automobileUrl, automobileFetchConfig);
+        if (automobileResponse.ok) {
+            const newSale = await response.json();
         }
     };
 
