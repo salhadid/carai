@@ -23,10 +23,11 @@ class AppointmentEncoder(ModelEncoder):
         "customer",
         "technician",
         "vip_status",
+        "status",
     ]
     encoders = {
         "technician": TechnicianEncoder(),
     }
 
-    def get_extra_data(self, o):
-        return {"status": o.status.name}
+    # def get_extra_data(self, o):
+    #     return {"status": o.status.name}

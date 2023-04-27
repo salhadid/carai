@@ -18,32 +18,9 @@ class Technician(models.Model):
         ordering = ("id",)
 
 
-class Status(models.Model):
-    """
-    The Status model provides a status to an Appointment, which
-    can be CREATED, CANCELED, or FINISHED.
-
-    Status is a Value Object and, therefore, does not have a
-    direct URL to view it.
-    """
-
-    id = models.PositiveSmallIntegerField(primary_key=True)
-    name = models.CharField(max_length=10, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ("id",)  # Default ordering for Status
-        verbose_name_plural = "statuses"  # Fix the pluralization
-
-
 class Appointment(models.Model):
     @classmethod
     def create(cls, **kwargs):
-        # set status
-        kwargs["status"] = Status.objects.get(name="CREATED")
-
         # set vip status
         inventory_vins = AutomobileVO.objects.all()
         vins = [inv_vin.vin for inv_vin in inventory_vins]
@@ -65,13 +42,9 @@ class Appointment(models.Model):
     vin = models.CharField(max_length=17)
     customer = models.CharField(max_length=200)
     vip_status = models.BooleanField(default=False)
+    status = models.CharField(max_length=10, default="CREATED")
     technician = models.ForeignKey(
         Technician,
-        related_name="appointments",
-        on_delete=models.PROTECT,
-    )
-    status = models.ForeignKey(
-        Status,
         related_name="appointments",
         on_delete=models.PROTECT,
     )
@@ -87,12 +60,12 @@ class Appointment(models.Model):
         self.save()
 
     def cancel(self):
-        status = Status.objects.get(name="CANCELED")
+        status = "CANCELLED"
         self.status = status
         self.save()
 
     def finish(self):
-        status = Status.objects.get(name="FINISHED")
+        status = "FINISHED"
         self.status = status
         self.save()
 
