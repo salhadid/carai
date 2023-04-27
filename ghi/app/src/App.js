@@ -13,6 +13,8 @@ import TechnicianForm from './TechnicianForm';
 import AppointmentsList from './AppointmentsList';
 import AppointmentForm from './AppointmentForm';
 import AppointmentsHistory from './AppointmentsHistory';
+import ManufacturersList from './ManufacturersList';
+import ManufacturerForm from './ManufacturerForm';
 
 
 function App() {
@@ -22,6 +24,10 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="manufacturers">
+            <Route path="/manufacturers" element={<ManufacturersList></ManufacturersList>} />
+            <Route path="create" element={<ManufacturerForm />} />
+          </Route>
           <Route path="salespeople">
             <Route path="/salespeople" element={<SalespeopleList></SalespeopleList>} />
             <Route path="create" element={<SalespersonForm />} />
