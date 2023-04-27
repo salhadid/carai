@@ -49,16 +49,6 @@ class Appointment(models.Model):
         on_delete=models.PROTECT,
     )
 
-    def get_vip_status(self):
-        """Check to see if the vehicle was purchased from the dealership"""
-        inventory_vins = AutomobileVO.objects.all()
-        vins = [inv_vin.vin for inv_vin in inventory_vins]
-        if self.vin in vins:
-            self.vip_status = True
-        else:
-            self.vip_status = False
-        self.save()
-
     def cancel(self):
         status = "CANCELLED"
         self.status = status
