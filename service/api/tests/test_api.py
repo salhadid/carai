@@ -153,7 +153,7 @@ class Tests(TransactionTestCase):
         )
 
         client = Client()
-        response = client.put(f"/api/appointments/{appointment.id}/cancel")
+        response = client.put(f"/api/appointments/{appointment.id}/cancel/")
         self.assertEqual(
             response.status_code, 200, msg="Did not get a 200 OK for appointment PUT."
         )
@@ -176,7 +176,7 @@ class Tests(TransactionTestCase):
         )
 
         client = Client()
-        response = client.put(f"/api/appointments/{appointment.id}/finish")
+        response = client.put(f"/api/appointments/{appointment.id}/finish/")
         self.assertEqual(
             response.status_code, 200, msg="Did not get a 200 OK for appointment PUT."
         )
