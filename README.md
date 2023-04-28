@@ -21,7 +21,7 @@ Created two (2) models (Technician, Appointment) and 1 value object (AutomobileV
 
 The Service Center API comes with RESTful endpoints for the following entities:
 
-- Technician: The technicians who work in the service center
+- Technician: The technicians who work in the service center.
 - Appointment: Service appointments for automobiles and their owners.
 
 Service API Base URL: `http://localhost:8080/`
@@ -91,6 +91,87 @@ NOTE: The AutomobileVO gets the `vin` from the Inventory Automobile Information 
 ## Sales microservice
 
 Created 3 models(Salesperson, Customer, and Sale) and 1 value object(automobile). The automobile value object links our sales to an automobile in our inventory microservice. Whenever an automobile is assigned to a sale, an automobile value object is created in our sales microservice database as a column in the table to link the automobile to the sale. Our salesperson, customer, and sale models allows us to save the respective data in our databases. The salesperson model allow us to input and our salespeoples' names while also creating and assigning a unique employee id to each employee. Our customer model allows us to create a database of all our customers' names, addresses, and phone numbers. The sale model has an automobile property that is there to link the automobile value object to an automobile in our inventory microservice. The salesperson and customer properties in our sales model grabs data from our salesperson and customer models and links them to a specific sale. We protected salesperson and customer properties on delete to avoid deleting the respective data when a sale is deleted and also to protect against deleting a salesperson or a customer that have already been assigned to a sale.
+
+### The Sales API
+
+The Sales API comes with RESTful endpoints for the following entities:
+
+- Salesperson: The salespeople who work in the sales department.
+- Customer: A customer who buys an automobile.
+- Sale: Sale transaction records for an automobile purchased by a customer and sold by a salesperson.
+
+Sale API Base URL: `http://localhost:8090/`
+
+Port: 8090
+
+#### Salesperson
+
+From Insomnia and your browser, you can access the salespeople endpoints at the following URLs.
+
+| Action | Method | URL |
+| ------ | ------ | --- |
+| List salespeople | GET | http://localhost:8090/api/salespeople/ |
+| Create a salesperson | POST | http://localhost:8090/api/salespeople/ |
+| Delete a specific salesperson | DELETE | http://localhost:8090/api/salespeople/:id/ |
+
+#### Customer
+
+From Insomnia and your browser, you can access the customer endpoints at the following URLs.
+
+| Action | Method | URL |
+| ------ | ------ | --- |
+| List customers | GET | http://localhost:8090/api/customers/ |
+| Create a customer | POST | http://localhost:8090/api/customers/ |
+| Delete a specific customer | DELETE | http://localhost:8090/api/customers/:id/ |
+
+#### Sale
+
+From Insomnia and your browser, you can access the sale endpoints at the following URLs.
+
+| Action | Method | URL |
+| ------ | ------ | --- |
+| List sales | GET | http://localhost:8090/api/sales/ |
+| Create a sale | POST | http://localhost:8090/api/sales/ |
+| Delete a specific sale | DELETE | http://localhost:8090/api/sales/:id/ |
+
+
+### Models
+
+There are four (4) models included in the Sales API:
+
+1. Salesperson (Entity)
+   1. `employee_id` (str, primary key)
+   2. `first_name` (str)
+   3. `last_name` (str)
+
+2. Customer (Entity)
+   1. `id` (int, primary key)
+   2. `first_name` (str)
+   3. `last_name` (str)
+   4. `address` (str)
+   5. `phone_number` (int)
+
+3. Sale (Entity)
+   1. `id` (int, primary key)
+   2. `automobile` (object, foreign key)
+   3. `salesperson` (object, foreign key)
+   4. `customer` (object, foreign key)
+   5. `price` (decimal)
+
+4. AutomobileVO (Value Object)
+   1. `vin` (str)
+
+NOTE: The AutomobileVO gets the `vin` from the Inventory Automobile Information endpoint using a poller found in the `poll` directory under the `sales` directory. It pulls data from http://project-beta-inventory-api-1:8000/api/automobiles/ every 60 seconds.
+
+### Frontend Components
+
+1. Add a Salesperson Form
+2. Salespeople List
+3. Add a Customer
+4. Customer List
+5. Record a New Sale
+6. List All Sales
+7. Salesperson History
 
 ## How to Run the Application
 
