@@ -23,50 +23,50 @@ import AutomobilesList from './AutomobilesList';
 import AutomobileForm from './AutomobileForm';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Nav />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="manufacturers">
-            <Route path="/manufacturers" element={<ManufacturersList></ManufacturersList>} />
-            <Route path="create" element={<ManufacturerForm />} />
-          </Route>
-          <Route path="models">
-            <Route path="/models" element={<VehicleModelList></VehicleModelList>} />
-            <Route path="create" element={<VehicleModelForm />} />
-          </Route>
-          <Route path="automobiles">
-            <Route path="/automobiles" element={<AutomobilesList></AutomobilesList>} />
-            <Route path="create" element={<AutomobileForm />} />
-          </Route>
-          <Route path="salespeople">
-            <Route path="/salespeople" element={<SalespeopleList></SalespeopleList>} />
-            <Route path="create" element={<SalespersonForm />} />
-          </Route>
-          <Route path="customers">
-            <Route path="/customers" element={<CustomerList></CustomerList>} />
-            <Route path="create" element={<CustomerForm />} />
-          </Route>
-          <Route path="sales">
-            <Route path="/sales" element={<SalesList></SalesList>} />
-            <Route path="create" element={<SaleForm />} />
-            <Route path="history" element={<SalespersonHistory />} />
-          </Route>
-          <Route path="technicians">
-            <Route path="/technicians" element={<TechnicianList></TechnicianList>} />
-            <Route path="create" element={<TechnicianForm />} />
-          </Route>
-          <Route path="appointments">
-            <Route path="/appointments" element={<AppointmentsList></AppointmentsList>} />
-            <Route path="create" element={<AppointmentForm />} />
-            <Route path="history" element={<AppointmentsHistory />} />
-          </Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Nav />
+            <div className="container">
+                <Routes>
+                    <Route path="/" element={<MainPage />} />
+                    <Route path="manufacturers">
+                        <Route path="/manufacturers" element={<ManufacturersList></ManufacturersList>} />
+                        <Route path="create" element={<ManufacturerForm />} />
+                    </Route>
+                    <Route path="models">
+                        <Route path="/models" element={<VehicleModelList></VehicleModelList>} />
+                        <Route path="create" element={<VehicleModelForm />} />
+                    </Route>
+                    <Route path="automobiles">
+                        <Route path="/automobiles" element={<AutomobilesList></AutomobilesList>} />
+                        <Route path="create" element={<AutomobileForm />} />
+                    </Route>
+                    <Route path="salespeople">
+                        <Route path="/salespeople" element={<SalespeopleList></SalespeopleList>} />
+                        <Route path="create" element={<SalespersonForm />} />
+                    </Route>
+                    <Route path="customers">
+                        <Route path="/customers" element={<CustomerList></CustomerList>} />
+                        <Route path="create" element={<CustomerForm />} />
+                    </Route>
+                    <Route path="sales">
+                        <Route path="/sales" element={<SalesList></SalesList>} />
+                        <Route path="create" element={<SaleForm />} />
+                        <Route path="history" element={<SalespersonHistory />} />
+                    </Route>
+                    <Route path="technicians">
+                        <Route path="/technicians" element={<TechnicianList></TechnicianList>} />
+                        <Route path="create" element={<TechnicianForm />} />
+                    </Route>
+                    <Route path="appointments">
+                        <Route path="/appointments" element={<AppointmentsList></AppointmentsList>} />
+                        <Route path="create" element={<AppointmentForm />} />
+                        <Route path="history" element={<AppointmentsHistory />} />
+                    </Route>
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;
