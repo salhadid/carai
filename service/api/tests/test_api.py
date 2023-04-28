@@ -18,12 +18,12 @@ class Tests(TransactionTestCase):
             response.status_code, 200, msg="Did not get a 200 OK for list salespeople."
         )
         self.assertTrue(
-            "technicians" in data, msg="Did not give response with salespeople field."
+            "technicians" in data, msg="Did not give response with technician field."
         )
         self.assertEqual(
             len(data["technicians"]),
             1,
-            msg="Did not return correct number of salespeople.",
+            msg="Did not return correct number of technicians.",
         )
 
     def test_technician_create(self):
@@ -32,27 +32,26 @@ class Tests(TransactionTestCase):
         response = client.post(
             "/api/technicians/", json.dumps(body), content_type="application/json"
         )
-        data = response.json()
 
         self.assertEqual(
             response.status_code, 200, msg="Did not get a 200 OK for the path projects/"
         )
 
     def test_technician_delete(self):
-        Technician.objects.create(first_name="first", last_name="last", employee_id=1)
+        tech = Technician.objects.create(first_name="first", last_name="last", employee_id=101)
 
         client = Client()
-        response = client.delete("/api/technicians/1")
+        response = client.delete(f"/api/technicians/{tech.id}/")
         self.assertEqual(
             response.status_code,
             200,
-            msg="Did not get a 200 OK for technicians delete.",
+            msg="Did not get a 200 OK for technician delete.",
         )
 
-        response = client.delete("/api/technicians/1/")
+        response = client.delete(f"/api/technicians/{tech.id}/")
         self.assertTrue(
             response.status_code == 404 or response.status_code == 400,
-            msg="Did not get a 404 OK technicians delete of an unknown id.",
+            msg="Did not get a 404 OK technician delete of an unknown id.",
         )
 
     ####APPOINTMENT ENDPOINTS
@@ -127,14 +126,14 @@ class Tests(TransactionTestCase):
         )
 
         client = Client()
-        response = client.delete(f"/api/appointments/{appointment.id}")
+        response = client.delete(f"/api/appointments/{appointment.id}/")
         self.assertEqual(
             response.status_code,
             200,
             msg="Did not get a 200 OK for appointment delete.",
         )
 
-        response = client.delete(f"/api/appointments/{101}")
+        response = client.delete(f"/api/appointments/{appointment.id}/")
         self.assertTrue(
             response.status_code == 404 or response.status_code == 400,
             msg="Did not get a 400 delete an unknown appointment.",
