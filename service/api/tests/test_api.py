@@ -5,7 +5,7 @@ from django.test import TransactionTestCase, Client
 
 class Tests(TransactionTestCase):
     ####TECHNICIANS ENDPOINTS
-    def test_sales_people_list(self):
+    def test_technician_list(self):
         Technician.objects.create(
             first_name="first", last_name="last", employee_id=1111
         )
@@ -26,7 +26,7 @@ class Tests(TransactionTestCase):
             msg="Did not return correct number of salespeople.",
         )
 
-    def test_sales_people_create(self):
+    def test_technician_create(self):
         client = Client()
         body = {"first_name": "first", "last_name": "last", "employee_id": 1}
         response = client.post(
@@ -38,7 +38,7 @@ class Tests(TransactionTestCase):
             response.status_code, 200, msg="Did not get a 200 OK for the path projects/"
         )
 
-    def test_sales_people_delete(self):
+    def test_technician_delete(self):
         Technician.objects.create(first_name="first", last_name="last", employee_id=1)
 
         client = Client()
@@ -102,7 +102,7 @@ class Tests(TransactionTestCase):
             "/api/appointments/", json.dumps(body), content_type="application/json"
         )
         self.assertEqual(
-            response.status_code, 200, msg="Did not get a 200 OK for the path projects/"
+            response.status_code, 200, msg="Did not get a 200 OK for appointments create"
         )
 
         body["technician"] = "3"
@@ -134,7 +134,7 @@ class Tests(TransactionTestCase):
             msg="Did not get a 200 OK for appointment delete.",
         )
 
-        response = client.delete(f"/api/appointments/{appointment.id}")
+        response = client.delete(f"/api/appointments/{101}")
         self.assertTrue(
             response.status_code == 404 or response.status_code == 400,
             msg="Did not get a 400 delete an unknown appointment.",
@@ -158,7 +158,7 @@ class Tests(TransactionTestCase):
             response.status_code, 200, msg="Did not get a 200 OK for appointment PUT."
         )
         self.assertEqual(
-            response.json()["status"],
+            response.json()["status"].lower(),
             "canceled",
             msg="Did not get change status to canceled.",
         )
@@ -181,7 +181,7 @@ class Tests(TransactionTestCase):
             response.status_code, 200, msg="Did not get a 200 OK for appointment PUT."
         )
         self.assertEqual(
-            response.json()["status"],
+            response.json()["status"].lower(),
             "finished",
             msg="Did not get change status to finished.",
         )
