@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 function AppointmentsList() {
-
     const [appointments, setAppointments] = useState([]);
 
     async function loadAppointments() {
-
-        const response = await fetch('http://localhost:8080/api/appointments/');
+        const response = await fetch("http://localhost:8080/api/appointments/");
 
         if (response.ok) {
             const data = await response.json();
@@ -19,8 +17,7 @@ function AppointmentsList() {
         } else {
             console.error(response);
         }
-    };
-
+    }
 
     const handleCancelSubmit = async (id) => {
         const cancelUrl = `http://localhost:8080/api/appointments/${id}/cancel/`;
@@ -28,8 +25,8 @@ function AppointmentsList() {
         const fetchConfig = {
             method: "put",
             headers: {
-                'Content-Type': 'application/json',
-            }
+                "Content-Type": "application/json",
+            },
         };
         const response = await fetch(cancelUrl, fetchConfig);
         if (response.ok) {
@@ -43,8 +40,8 @@ function AppointmentsList() {
         const fetchConfig = {
             method: "put",
             headers: {
-                'Content-Type': 'application/json',
-            }
+                "Content-Type": "application/json",
+            },
         };
         const response = await fetch(finishUrl, fetchConfig);
         if (response.ok) {
@@ -72,21 +69,31 @@ function AppointmentsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map(appt => {
-                        const date = appt.date_time.split('T')[0];
-                        const rawTime = appt.date_time.split('T')[1];
+                    {appointments.map((appt) => {
+                        const date = appt.date_time.split("T")[0];
+                        const rawTime = appt.date_time.split("T")[1];
                         const time = rawTime.split("+")[0];
                         return (
                             <tr key={appt.id}>
                                 <td>{appt.vin}</td>
-                                <td>{appt.vip_status ? 'Yes' : 'No'}</td>
+                                <td>{appt.vip_status ? "Yes" : "No"}</td>
                                 <td>{appt.customer}</td>
                                 <td>{date}</td>
                                 <td>{time}</td>
-                                <td>{appt.technician.first_name + " " + appt.technician.last_name}</td>
+                                <td>
+                                    {appt.technician.first_name + " " + appt.technician.last_name}
+                                </td>
                                 <td>{appt.reason}</td>
-                                <td><button onClick={() => handleCancelSubmit(appt.id)}>Cancel</button></td>
-                                <td><button onClick={() => handleFinishSubmit(appt.id)}>Finish</button></td>
+                                <td>
+                                    <button onClick={() => handleCancelSubmit(appt.id)}>
+                                        Cancel
+                                    </button>
+                                </td>
+                                <td>
+                                    <button onClick={() => handleFinishSubmit(appt.id)}>
+                                        Finish
+                                    </button>
+                                </td>
                             </tr>
                         );
                     })}
@@ -94,6 +101,6 @@ function AppointmentsList() {
             </table>
         </div>
     );
-};
+}
 
 export default AppointmentsList;
