@@ -19,7 +19,7 @@ Created 3 models(Salesperson, Customer, and Sale) and 1 value object(automobile)
 
 ## How to Run the Application
 
-These instructions assume you have docker installed on your computer.
+These instructions assume you have [docker](https://www.docker.com/get-started/) installed on your computer.
 
 STEP 1: Clone the main branch of this repository to your local computer in a directory of your choosing using the HTTPS link.
 
@@ -50,3 +50,17 @@ This should bring you to either a blank page if the docker containers are not lo
 ![CarCar mainpage](readme_images/CarCar-project-mainpage.png)
 
 Now you are ready to test the application through the React frontend. Start clicking on the navigation links in the green bar to start working with the application. Enjoy!
+
+
+### Stopping the Containers
+
+From the terminal: Press `control+C` to stop the docker containers in the terminal session where the containers are running (MacOS)
+
+Or you can stop the containers from the [Docker Desktop Application](https://www.docker.com/products/docker-desktop/)
+
+### Removing the Containers
+
+If you want to free up some space on your computer you can remove the containers with this command (make sure to stop them first):
+
+    docker container prune -f
+
