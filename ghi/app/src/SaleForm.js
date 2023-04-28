@@ -63,10 +63,10 @@ function SaleForm() {
         }
 
 
-        const automobileUrl = `http://localhost:8100/api/automobiles/${selectedAutomobile}`;
+        const automobileUrl = `http://localhost:8100/api/automobiles/${selectedAutomobile}/`;
         const automobileFetchConfig = {
             method: "put",
-            body: JSON.stringify(putData.sold = true),
+            body: JSON.stringify({ sold: true }),
             headers: {
                 'Content-Type': 'application/json',
             }

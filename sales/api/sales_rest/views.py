@@ -67,7 +67,8 @@ def api_show_customer(request, pk):
             safe=False,
         )
     else:
-        count, _ = Customer.objects.filter(id=pk).delete()
+        customer = get_object_or_404(Customer, id=pk)
+        count, _ = customer.delete()
         return JsonResponse({"deleted": count > 0})
 
 
@@ -130,5 +131,6 @@ def api_show_sale(request, pk):
             safe=False,
         )
     else:
-        count, _ = Sale.objects.filter(id=pk).delete()
+        sale = get_object_or_404(Sale, id=pk)
+        count, _ = sale.delete()
         return JsonResponse({"deleted": count > 0})
