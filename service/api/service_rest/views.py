@@ -37,8 +37,9 @@ def api_technicians(request):
 def api_technician(request, pk):
     if request.method == "DELETE":
         technician = get_object_or_404(Technician, id=pk)
+        technician_id = technician.id
         technician.delete()
-        message = f"Deleted technician: {technician.first_name} {technician.last_name}"
+        message = f"Deleted technician: {technician.first_name} {technician.last_name} with id {technician_id}"
         return JsonResponse({"message": message})
     else:
         # GET response for individual technician id
