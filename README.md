@@ -9,9 +9,84 @@ Team:
 
 We used domain driven design to build microservices. We have an inventory microservice, a sales microservice and a service microservice that allow us to manage our inventory, sales, customer and employee data. We used REST APIs for each microservice. We integrated the React framework to build a frontend UI to allow users to interact(create, read, delete) with our application and manage their inventory. We used docker containers to manage each service.
 
+### Project Architecture Diagram
+
+![Project Beta Diagram](readme_images/project-beta-diagram.png)
+
 ## Service microservice
 
 Created two (2) models (Technician, Appointment) and 1 value object (AutomobileVO). The automobile value object links appointments to the automobile inventory microservice to determine if the automobile was purchased at the dealership. If the automobile was purchased at the dealership, these customers get a VIP status at the service center when they make an appointment. From a technical perspective, when an automobile is added to inventory, an automobile value object is created in our service microservice database which is then used to link the automobile to to an appointment. Our Technician and Appointment models allow us to store the respective data in our databases. The Technician model allows us to manage our technicians. The Appointment model allows us to manage service appointments, including assigning technicians and prioritizing VIP customers. The technician property in the Appointment model is protected on delete to avoid deleting the technician when an Appointment is deleted.
+
+### The Service API
+
+The Service Center API comes with RESTful endpoints for the following entities:
+
+- Technician: The technicians who work in the service center
+- Appointment: Service appointments for automobiles and their owners.
+
+Service API Base URL: `http://localhost:8080/`
+
+Port: 8080
+
+#### Technicians
+
+From Insomnia and your browser, you can access the technician endpoints at the following URLs.
+
+| Action | Method | URL |
+| ------ | ------ | --- |
+| List technicians | GET | http://localhost:8080/api/technicians/ |
+| Create a technician | POST | http://localhost:8080/api/technicians/ |
+| Delete a specific technician | DELETE | http://localhost:8080/api/technicians/:id/ |
+| Get a specific technician | GET | http://localhost:8080/api/technicians/:id/ |
+
+#### Appointments
+
+From Insomnia and your browser, you can access the appointment endpoints at the following URLs.
+
+| Action | Method | URL |
+| ------ | ------ | --- |
+| List appointments | GET | http://localhost:8080/api/appointments/ |
+| Create an appointment | POST | http://localhost:8080/api/appointments/ |
+| Delete an appointment | DELETE | http://localhost:8080/api/appointments/:id/ |
+| Get a single appointment | GET | http://localhost:8080/api/appointments/:id/ |
+| Set appointment status to canceled | PUT | http://localhost:8080/api/appointments/:id/cancel/ |
+| Set appointment status to finished | PUT | http://localhost:8080/api/appointments/:id/finish/ |
+
+
+### Models
+
+There are three (3) models included in the Service API:
+
+1. Technician (Entity)
+   1. `id` (int, primary key)
+   2. `first_name` (str)
+   3. `last_name` (str)
+   4. `employee_id` (str, unique)
+
+2. Appointment (Entity)
+   1. `id` (int, primary key)
+   2. `created` (datetime)
+   3. `updated` (datetime)
+   4. `date_time` (datetime): the date and time of the appointment
+   5. `reason` (str)
+   6. `vin` (str)
+   7. `customer` (str)
+   8. `vip_status` (bool)
+   9. `status` (str): status of the service appointment (CREATED, FINISHED, CANCELED)
+   10. `technician` (object, foreign key)
+
+3. AutomobileVO (Value Object)
+   1. `vin` (str)
+
+NOTE: The AutomobileVO gets the `vin` from the Inventory Automobile Information endpoint using a poller found in the `poll` directory under the `service` directory. It pulls data from http://project-beta-inventory-api-1:8000/api/automobiles/ every 60 seconds.
+
+### Frontend Components
+
+1. Add a Technician Form
+2. Technicians List
+3. Create a Service Appointment
+4. List Service Appointments (Active)
+5. Service Appointment History (All Service Appointments)
 
 ## Sales microservice
 
