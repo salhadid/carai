@@ -95,7 +95,7 @@ class Tests(TransactionTestCase):
             "reason": "broken glass. everywhere.",
             "vin": "2222",
             "customer": "Warren Longmire",
-            "technician": "1",
+            "technician": tech.id,
         }
 
         response = client.post(
