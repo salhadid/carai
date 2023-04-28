@@ -50,7 +50,7 @@ class Appointment(models.Model):
     )
 
     def cancel(self):
-        status = "CANCELLED"
+        status = "CANCELED"
         self.status = status
         self.save()
 
