@@ -26,9 +26,7 @@ function SalesList() {
                 'Content-Type': 'application/json',
             }
         }
-        console.log(fetchConfig)
         const response = await fetch(deleteUrl, fetchConfig)
-        console.log(response)
         if (response.ok) {
             window.location.reload(false)
         }

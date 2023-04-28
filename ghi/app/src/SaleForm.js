@@ -56,9 +56,6 @@ function SaleForm() {
         }
         const response = await fetch(saleUrl, fetchConfig);
         if (response.ok) {
-            const newSale = await response.json();
-
-
             setSelectedSalesperson('');
             setSelectedCustomer('');
             setSelectedAutomobile('');
@@ -75,9 +72,6 @@ function SaleForm() {
             }
         }
         const automobileResponse = await fetch(automobileUrl, automobileFetchConfig);
-        if (automobileResponse.ok) {
-            const newSale = await response.json();
-        }
     };
 
     async function loadAutomobiles() {
