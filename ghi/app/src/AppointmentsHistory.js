@@ -33,9 +33,13 @@ function AppointmentsHistory() {
         }
     }
 
+    // useEffect(() => {
+    //     loadAppointments();
+    // }, []);
+
     useEffect(() => {
         loadAppointments();
-    }, []);
+    }, [searchInput]);
 
     return (
         <div>
