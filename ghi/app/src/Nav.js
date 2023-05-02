@@ -1,9 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav } from 'react-bootstrap';
-import { Dropdown } from 'react-bootstrap';
+import { NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+
 function Navigation() {
+
+	const noActiveStyle = {
+		backgroundColor: "transparent",
+		color: "#fff",
+	};
+
 	return (
 		<Navbar bg="success" expand="lg" variant="dark">
 			<Navbar.Brand as={NavLink} to="/">
@@ -12,116 +20,76 @@ function Navigation() {
 			<Navbar.Toggle aria-controls="navbarSupportedContent" />
 			<Navbar.Collapse id="navbarSupportedContent">
 				<Nav className="me-auto mb-2 mb-lg-0">
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-manufacturers">
-							Manufacturers
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/manufacturers">
+					<NavDropdown title="Manufacturers" id="manufacturers-dropdown">
+							<NavDropdown.Item as={NavLink} to="/manufacturers" style={noActiveStyle}>
 								Manufacturers
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/manufacturers/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/manufacturers/create" style={noActiveStyle}>
 								Create a Manufacturer
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-models">
-							Models
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/models">
+							</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Models" id="models-dropdown">
+							<NavDropdown.Item as={NavLink} to="/models" style={noActiveStyle}>
 								Models
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/models/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/models/create" style={noActiveStyle}>
 								Create a Model
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-automobiles">
-							Automobiles
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/automobiles">
+							</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Automobiles" id="automobiles-dropdown">
+							<NavDropdown.Item as={NavLink} to="/automobiles" style={noActiveStyle}>
 								Automobiles
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/automobiles/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/automobiles/create" style={noActiveStyle}>
 								Create an Automobile
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-salespeople">
-							Salespeople
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/salespeople">
+							</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Salespeople" id="salespeople-dropdown">
+							<NavDropdown.Item as={NavLink} to="/salespeople" style={noActiveStyle}>
 								Salespeople
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/salespeople/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/salespeople/create" style={noActiveStyle}>
 								Add a Salesperson
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-customers">
-							Customers
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/customers">
+							</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Customers" id="customers-dropdown">
+							<NavDropdown.Item as={NavLink} to="/customers" style={noActiveStyle}>
 								Customers
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/customers/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/customers/create" style={noActiveStyle}>
 								Add a Customer
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-sales">
-							Sales
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/sales">
+							</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Sales" id="sales-dropdown">
+							<NavDropdown.Item as={NavLink} to="/sales" style={noActiveStyle}>
 								Sales
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/sales/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/sales/create" style={noActiveStyle}>
 								Add a Sale
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/sales/history">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/sales/history" style={noActiveStyle}>
 								Salesperson History
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-technicians">
-							Technicians
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/technicians">
+							</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Technicians" id="technicians-dropdown">
+							<NavDropdown.Item as={NavLink} to="/technicians" style={noActiveStyle}>
 								Technicians
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/technicians/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/technicians/create" style={noActiveStyle}>
 								Add a Technician
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-					<Dropdown>
-						<Dropdown.Toggle variant="success" id="dropdown-appointments">
-							Service Appointments
-						</Dropdown.Toggle>
-						<Dropdown.Menu>
-							<Dropdown.Item as={NavLink} to="/appointments">
+							</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Service Appointments" id="appointments-dropdown">
+							<NavDropdown.Item as={NavLink} to="/appointments" style={noActiveStyle}>
 								Service Appointments
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/appointments/create">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/appointments/create" style={noActiveStyle}>
 								Add an Appointment
-							</Dropdown.Item>
-							<Dropdown.Item as={NavLink} to="/appointments/history">
+							</NavDropdown.Item>
+							<NavDropdown.Item as={NavLink} to="/appointments/history" style={noActiveStyle}>
 								Service History
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
+							</NavDropdown.Item>
+					</NavDropdown>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
