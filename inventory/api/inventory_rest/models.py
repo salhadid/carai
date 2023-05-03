@@ -2,6 +2,11 @@ from django.db import models
 from django.urls import reverse
 
 
+class SuggestedPriceVO(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    suggested_price = models.DecimalField(max_digits=12, decimal_places=2)
+
+
 class Manufacturer(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
@@ -28,6 +33,13 @@ class Automobile(models.Model):
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
+
+    price = models.ForeignKey(
+        SuggestedPriceVO,
+        related_name="automobiles",
+        on_delete=models.CASCADE,
+        null=True,
+    )
 
     model = models.ForeignKey(
         VehicleModel,

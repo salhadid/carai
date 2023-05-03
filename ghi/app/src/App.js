@@ -17,8 +17,6 @@ import ManufacturersList from './ManufacturersList';
 import ManufacturerForm from './ManufacturerForm';
 import VehicleModelList from './VehicleModelList';
 import VehicleModelForm from './VehicleModelForm';
-
-
 import AutomobilesList from './AutomobilesList';
 import AutomobileForm from './AutomobileForm';
 
