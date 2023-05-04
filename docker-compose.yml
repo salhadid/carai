@@ -107,7 +107,7 @@ services:
     depends_on:
       - database
     environment:
-      DATABASE_URL: postgres://predict:password@database:5432/ml_service
+      DATABASE_URL: postgres://ml_service:password@database:5432/ml_service
       WAIT_HOSTS: database:5432
       WAIT_TIMEOUT: 240
   ml-service-poller:
@@ -122,6 +122,6 @@ services:
       - database
       - ml-service-api
     environment:
-      DATABASE_URL: postgres://predict:password@database:5432/ml-service
+      DATABASE_URL: postgres://ml_service:password@database:5432/ml_service
       WAIT_HOSTS: database:5432,ml-service-api:8000
       WAIT_TIMEOUT: 240
