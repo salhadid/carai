@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 function PredictAutoPriceForm() {
 
     // initialize list for drop down selector  
-    const [models, setModels] = useState([]);
-    const [manufacturers, setManufacturers] = useState([]);
+    // const [models, setModels] = useState([]);
+    // const [manufacturers, setManufacturers] = useState([]);
 
     // initialize variables with state
     const [color, setColor] = useState('');
@@ -93,24 +93,24 @@ function PredictAutoPriceForm() {
     };
 
     // fetch data for selector 
-    const fetchData = async () => {
-        const modelUrl = 'http://localhost:8100/api/models/';
-        const modelResponse = await fetch(modelUrl);
-        if (modelResponse.ok) {
-            const modelData = await modelResponse.json();
-            setModels(modelData.models);
-        }
-        const manufacturerUrl = 'http://localhost:8100/api/manufacturers/';
-        const manufacturerResponse = await fetch(manufacturerUrl);
-        if (manufacturerResponse.ok) {
-            const manufacturerData = await manufacturerResponse.json();
-            setManufacturers(manufacturerData.manufacturers);
-        }
-    };
+    // const fetchData = async () => {
+    //     const modelUrl = 'http://localhost:8100/api/models/';
+    //     const modelResponse = await fetch(modelUrl);
+    //     if (modelResponse.ok) {
+    //         const modelData = await modelResponse.json();
+    //         setModels(modelData.models);
+    //     }
+    //     const manufacturerUrl = 'http://localhost:8100/api/manufacturers/';
+    //     const manufacturerResponse = await fetch(manufacturerUrl);
+    //     if (manufacturerResponse.ok) {
+    //         const manufacturerData = await manufacturerResponse.json();
+    //         setManufacturers(manufacturerData.manufacturers);
+    //     }
+    // };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
 
 
     return (
@@ -118,7 +118,7 @@ function PredictAutoPriceForm() {
             <div className="offset-3 col-6">
                 <div className="shadow p-4 mt-4">
                     <h1>Price an Automobile</h1>
-                    <form onSubmit={handleSubmit} id="create-automobile-form">
+                    <form onSubmit={handleSubmit} id="price-automobile-form">
                         <div className="form-floating mb-3">
                             <input onChange={handleColorChange} value={color} placeholder="Color..." required type="text" name="color" id="color" className="form-control" />
                             <label htmlFor="color">Color</label>
@@ -131,7 +131,15 @@ function PredictAutoPriceForm() {
                             <input onChange={handleVinChange} value={vin} placeholder="VIN..." type="text" name="vin" id="vin" className="form-control" />
                             <label htmlFor="vin">VIN</label>
                         </div>
-                        <div className="mb-3">
+                        <div className="form-floating mb-3">
+                            <input onChange={handleSelectedManufacturerChange} value={selectedManufacturer} placeholder="Manufacturer..." type="text" name="manufacturer" id="manufacturer" className="form-control" />
+                            <label htmlFor="manufacturer">Manufacturer</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input onChange={handleSelectedModelChange} value={selectedModel} placeholder="Model..." type="text" name="model" id="model" className="form-control" />
+                            <label htmlFor="model">Model</label>
+                        </div>
+                        {/* <div className="mb-3">
                             <label htmlFor="model">Model</label>
                             <select onChange={handleSelectedModelChange} value={selectedModel} required name="model" id="model" className="form-control">
                                 <option value="">Choose a model...</option>
@@ -156,7 +164,7 @@ function PredictAutoPriceForm() {
                                     )
                                 })}
                             </select>
-                        </div>
+                        </div> */}
                         <button className="btn btn-primary">Get Price</button>
                     </form>
                 </div>
@@ -168,8 +176,8 @@ function PredictAutoPriceForm() {
                     <p>Color: {dColor}</p>
                     <p>Year: {dYear}</p>
                     <p>VIN: {dVin}</p>
-                    <p>Model: {dSelectedModel}</p>
                     <p>Manufacturer: {dSelectedManufacturer}</p>
+                    <p>Model: {dSelectedModel}</p>
                 </center>
             </div >
         </div >
