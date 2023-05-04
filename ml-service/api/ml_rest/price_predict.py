@@ -1,28 +1,42 @@
+from django.conf import settings
+
 import pandas as pd
 import numpy as np
 
 import pickle
 import json
-
-def read_from_json(file_handle: str) -> dict:
-    with open(file_handle, "r") as open_file:
-        json_object = json.load(open_file)
-    return json_object
+import os
 
 def combine_model_name(model_name: str) -> str:
     model_name_list = model_name.split(" ")
     return "-".join(model_name_list)
 
+def open_model(file_name: str, file_type: str) -> any:
+    models_folder = settings.BASE_DIR / 'ml_rest' / 'ml_models'
+    file_path = os.path.join(models_folder, os.path.basename(file_name))
+    if os.path.exists(file_path) and file_type == "pkl":
+        print("Loading Trained Model")
+        model = pickle.load(open(file_path, "rb"))
+    elif os.path.exists(file_path) and file_type == "json":
+        with open(file_path, "r") as open_file:
+            model = json.load(open_file)
+    else:
+        print('No model with this name, check this and retry')
+        model = None
+    return model
 
-MODEL_FILEPATH = "../ml_models/model_file.pkl"
-FEATURE_STORE_FILEPATH = "../ml_models/model_feature_store.json"
+
+MODEL_FILENAME = "model_file.pkl"
+FEATURE_STORE_FILENAME = "model_feature_store.json"
+
+# load the model - move this to dockerfile to load on run
+restored_model = open_model(file_name=MODEL_FILENAME, file_type="pkl")
+
+# load feature store - move this to dockerfile to load on run
+feature_store_dict = open_model(file_name=FEATURE_STORE_FILENAME, file_type="json")
 
 def predict_price(input_data: dict) -> dict:
-    # load the model - move this to dockerfile to load on run
-    restored_model = pickle.load(open(MODEL_FILEPATH, "rb"))
 
-    # load feature store - move this to dockerfile to load on run
-    feature_store_dict = read_from_json(file_handle=FEATURE_STORE_FILEPATH)
     feature_list = feature_store_dict.get("feature_list")
 
     input_df = pd.DataFrame(0, index=np.arange(1), columns=feature_list)
@@ -55,5 +69,4 @@ def predict_price(input_data: dict) -> dict:
     # send a json response or store in database
     price_pred = round(prediction[0], 2)
 
-    output_dict = input_data["suggested_price"] = price_pred
-    return output_dict
+    return price_pred

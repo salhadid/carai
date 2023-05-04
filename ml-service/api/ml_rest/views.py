@@ -9,8 +9,9 @@ from .price_predict import predict_price
 def api_predict_price(request):
     try:
         content = json.loads(request.body)
-        updated_content = predict_price(input_data=content)
-        return JsonResponse({"auto": updated_content})
+        auto_price_prediction = predict_price(input_data=content)
+        content["suggested_price"] = auto_price_prediction
+        return JsonResponse({"auto": content})
     except:
         response = JsonResponse(
             {"message": "Could not predict price"}
