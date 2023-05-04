@@ -29,7 +29,7 @@ const Dashboard = () => {
 		}
 
 		let salesbymanufacturer = []
-    	let manufacturercount = {}
+		let manufacturercount = {}
 
 		for (let manufacturer of salesResponse.data.sales) {
 			salesbymanufacturer.push(manufacturer.automobile.manufacturer_name);
@@ -84,7 +84,7 @@ const Dashboard = () => {
 	}
 
 	return (
-		<div>
+		<div style={{ width: "800px", height: "600px", margin: "auto" }}>
 			<h2>Sales by Salesperson</h2>
 			<Bar data={salesChartData} />
 			<h2>Automobiles Sold by Manufacturer</h2>
