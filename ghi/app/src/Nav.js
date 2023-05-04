@@ -9,7 +9,7 @@ function Navigation() {
 
 	const noActiveStyle = {
 		backgroundColor: "transparent",
-		color: "#fff",
+		color: "black",
 	};
 
 	return (
@@ -93,9 +93,9 @@ function Navigation() {
 							Service History
 						</NavDropdown.Item>
 					</NavDropdown>
-					<Nav.Link as={NavLink} to="/dashboard" style={noActiveStyle}>
-                        Dashboard
-                    </Nav.Link>
+					<Nav.Link as={NavLink} to="/dashboard">
+						Dashboard
+					</Nav.Link>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
