@@ -11,12 +11,15 @@ flake8==4.0.1
 idna==3.3
 mccabe==0.6.1
 mypy-extensions==0.4.3
+numpy==1.24.3
+pandas==2.0.1
 pathspec==0.9.0
 platformdirs==2.5.1
 psycopg2==2.9.3
 pycodestyle==2.8.0
 pyflakes==2.4.0
 requests==2.27.1
+scikit-learn==1.2.2
 sqlparse==0.4.2
 tomli==2.0.1
 urllib3==1.26.9
