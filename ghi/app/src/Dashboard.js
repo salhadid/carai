@@ -17,7 +17,9 @@ const Dashboard = () => {
 
 
 		for (let sale of salesResponse.data.sales) {
-			salesbysalesperson.push(sale.salesperson.employee_id);
+			let fullName = sale.salesperson.first_name + " " + sale.salesperson.last_name;
+			// salesbysalesperson.push(sale.salesperson.employee_id);
+			salesbysalesperson.push(fullName);
 		}
 
 		for (let sale of salesbysalesperson) {
@@ -49,7 +51,7 @@ const Dashboard = () => {
 		setLoading(false);
 	};
 
-
+	console.log(salesData);
 	const salesChartData = salesData
 		? {
 			labels: Object.keys(salesData).map((id) => id),
