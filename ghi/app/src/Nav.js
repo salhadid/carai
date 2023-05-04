@@ -12,9 +12,15 @@ function Navigation() {
 		color: "black",
 	};
 
+	const navStyle = {
+		backgroundColor: "",
+		color: "white",
+		margin: 10,
+	};
+
 	return (
 		<Navbar bg="success" expand="lg" variant="dark">
-			<Navbar.Brand as={NavLink} to="/">
+			<Navbar.Brand as={NavLink} to="/" style={navStyle}>
 				Car.ai
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="navbarSupportedContent" />
