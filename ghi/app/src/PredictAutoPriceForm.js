@@ -164,13 +164,12 @@ function PredictAutoPriceForm() {
             <div>
                 <center>
                     <h2>Suggested Price</h2>
-                    <p></p>
+                    <h3>{dSuggestedPrice}</h3>
                     <p>Color: {dColor}</p>
                     <p>Year: {dYear}</p>
                     <p>VIN: {dVin}</p>
                     <p>Model: {dSelectedModel}</p>
                     <p>Manufacturer: {dSelectedManufacturer}</p>
-                    <p>Suggested Price: {dSuggestedPrice}</p>
                 </center>
             </div >
         </div >
