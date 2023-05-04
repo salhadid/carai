@@ -90,6 +90,9 @@ function Navigation() {
 								Service History
 							</NavDropdown.Item>
 					</NavDropdown>
+					<Nav.Link as={NavLink} to="/dashboard" style={noActiveStyle}>
+                        Dashboard
+                    </Nav.Link>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>

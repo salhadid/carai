@@ -17,8 +17,12 @@ def get_automobiles():
     response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles/")
     content = json.loads(response.content)
     for automobile in content["autos"]:
+        print("model_name: ", automobile["model"]["name"])
+        print("manufacturer_name: ", automobile["model"]["manufacturer"]["name"])
         AutomobileVO.objects.update_or_create(
             vin=automobile["vin"],
+            model_name=automobile["model"]["name"],
+            manufacturer_name=automobile["model"]["manufacturer"]["name"],
             defaults={
                 "vin": automobile["vin"],
             },
