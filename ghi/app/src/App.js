@@ -19,6 +19,7 @@ import VehicleModelList from './VehicleModelList';
 import VehicleModelForm from './VehicleModelForm';
 import AutomobilesList from './AutomobilesList';
 import AutomobileForm from './AutomobileForm';
+import PredictAutoPriceForm from './PredictAutoPriceForm';
 
 function App() {
     return (
@@ -38,6 +39,7 @@ function App() {
                     <Route path="automobiles">
                         <Route path="/automobiles" element={<AutomobilesList></AutomobilesList>} />
                         <Route path="create" element={<AutomobileForm />} />
+                        <Route path="price" element={<PredictAutoPriceForm />} />
                     </Route>
                     <Route path="salespeople">
                         <Route path="/salespeople" element={<SalespeopleList></SalespeopleList>} />
