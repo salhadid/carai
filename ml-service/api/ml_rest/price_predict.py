@@ -7,12 +7,14 @@ import pickle
 import json
 import os
 
+
 def combine_model_name(model_name: str) -> str:
     model_name_list = model_name.split(" ")
     return "-".join(model_name_list)
 
+
 def open_model(file_name: str, file_type: str) -> any:
-    models_folder = settings.BASE_DIR / 'ml_rest' / 'ml_models'
+    models_folder = settings.BASE_DIR / "ml_rest" / "ml_models"
     file_path = os.path.join(models_folder, os.path.basename(file_name))
     if os.path.exists(file_path) and file_type == "pkl":
         print("Loading Trained Model")
@@ -21,7 +23,7 @@ def open_model(file_name: str, file_type: str) -> any:
         with open(file_path, "r") as open_file:
             model = json.load(open_file)
     else:
-        print('No model with this name, check this and retry')
+        print("No model with this name, check this and retry")
         model = None
     return model
 
@@ -35,8 +37,8 @@ restored_model = open_model(file_name=MODEL_FILENAME, file_type="pkl")
 # load feature store - move this to dockerfile to load on run
 feature_store_dict = open_model(file_name=FEATURE_STORE_FILENAME, file_type="json")
 
-def predict_price(input_data: dict) -> dict:
 
+def predict_price(input_data: dict) -> dict:
     feature_list = feature_store_dict.get("feature_list")
 
     input_df = pd.DataFrame(0, index=np.arange(1), columns=feature_list)
@@ -46,7 +48,7 @@ def predict_price(input_data: dict) -> dict:
         "year": input_data["year"],
         "manufacturer": input_data["manufacturer"].lower(),
         "model": input_data["model"].lower(),
-        "paint_color": input_data["color"].lower()
+        "paint_color": input_data["color"].lower(),
     }
 
     new_dict = {}
