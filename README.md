@@ -2,8 +2,8 @@
 
 Team:
 
-* Shahem Al Hadid - Sales
-* Ryan Curry - Service
+- Shahem Al Hadid - Sales
+- Ryan Curry - Service
 
 ## Design
 
@@ -11,7 +11,7 @@ We used domain driven design to build microservices. We have an inventory micros
 
 ### Project Architecture Diagram
 
-![Project Beta Diagram](readme_images/project-beta-diagram.png)
+![Project Beta Diagram](readme_images/CarAI-diagram.png)
 
 ## Service microservice
 
@@ -32,38 +32,39 @@ Port: 8080
 
 From Insomnia and your browser, you can access the technician endpoints at the following URLs.
 
-| Action | Method | URL |
-| ------ | ------ | --- |
-| List technicians | GET | http://localhost:8080/api/technicians/ |
-| Create a technician | POST | http://localhost:8080/api/technicians/ |
+| Action                       | Method | URL                                        |
+| ---------------------------- | ------ | ------------------------------------------ |
+| List technicians             | GET    | http://localhost:8080/api/technicians/     |
+| Create a technician          | POST   | http://localhost:8080/api/technicians/     |
 | Delete a specific technician | DELETE | http://localhost:8080/api/technicians/:id/ |
-| Get a specific technician | GET | http://localhost:8080/api/technicians/:id/ |
+| Get a specific technician    | GET    | http://localhost:8080/api/technicians/:id/ |
 
 #### Appointments
 
 From Insomnia and your browser, you can access the appointment endpoints at the following URLs.
 
-| Action | Method | URL |
-| ------ | ------ | --- |
-| List appointments | GET | http://localhost:8080/api/appointments/ |
-| Create an appointment | POST | http://localhost:8080/api/appointments/ |
-| Delete an appointment | DELETE | http://localhost:8080/api/appointments/:id/ |
-| Get a single appointment | GET | http://localhost:8080/api/appointments/:id/ |
-| Set appointment status to canceled | PUT | http://localhost:8080/api/appointments/:id/cancel/ |
-| Set appointment status to finished | PUT | http://localhost:8080/api/appointments/:id/finish/ |
-
+| Action                             | Method | URL                                                |
+| ---------------------------------- | ------ | -------------------------------------------------- |
+| List appointments                  | GET    | http://localhost:8080/api/appointments/            |
+| Create an appointment              | POST   | http://localhost:8080/api/appointments/            |
+| Delete an appointment              | DELETE | http://localhost:8080/api/appointments/:id/        |
+| Get a single appointment           | GET    | http://localhost:8080/api/appointments/:id/        |
+| Set appointment status to canceled | PUT    | http://localhost:8080/api/appointments/:id/cancel/ |
+| Set appointment status to finished | PUT    | http://localhost:8080/api/appointments/:id/finish/ |
 
 ### Models
 
 There are three (3) models included in the Service API:
 
 1. Technician (Entity)
+
    1. `id` (int, primary key)
    2. `first_name` (str)
    3. `last_name` (str)
    4. `employee_id` (str, unique)
 
 2. Appointment (Entity)
+
    1. `id` (int, primary key)
    2. `created` (datetime)
    3. `updated` (datetime)
@@ -108,43 +109,44 @@ Port: 8090
 
 From Insomnia and your browser, you can access the salespeople endpoints at the following URLs.
 
-| Action | Method | URL |
-| ------ | ------ | --- |
-| List salespeople | GET | http://localhost:8090/api/salespeople/ |
-| Create a salesperson | POST | http://localhost:8090/api/salespeople/ |
+| Action                        | Method | URL                                        |
+| ----------------------------- | ------ | ------------------------------------------ |
+| List salespeople              | GET    | http://localhost:8090/api/salespeople/     |
+| Create a salesperson          | POST   | http://localhost:8090/api/salespeople/     |
 | Delete a specific salesperson | DELETE | http://localhost:8090/api/salespeople/:id/ |
 
 #### Customer
 
 From Insomnia and your browser, you can access the customer endpoints at the following URLs.
 
-| Action | Method | URL |
-| ------ | ------ | --- |
-| List customers | GET | http://localhost:8090/api/customers/ |
-| Create a customer | POST | http://localhost:8090/api/customers/ |
+| Action                     | Method | URL                                      |
+| -------------------------- | ------ | ---------------------------------------- |
+| List customers             | GET    | http://localhost:8090/api/customers/     |
+| Create a customer          | POST   | http://localhost:8090/api/customers/     |
 | Delete a specific customer | DELETE | http://localhost:8090/api/customers/:id/ |
 
 #### Sale
 
 From Insomnia and your browser, you can access the sale endpoints at the following URLs.
 
-| Action | Method | URL |
-| ------ | ------ | --- |
-| List sales | GET | http://localhost:8090/api/sales/ |
-| Create a sale | POST | http://localhost:8090/api/sales/ |
+| Action                 | Method | URL                                  |
+| ---------------------- | ------ | ------------------------------------ |
+| List sales             | GET    | http://localhost:8090/api/sales/     |
+| Create a sale          | POST   | http://localhost:8090/api/sales/     |
 | Delete a specific sale | DELETE | http://localhost:8090/api/sales/:id/ |
-
 
 ### Models
 
 There are four (4) models included in the Sales API:
 
 1. Salesperson (Entity)
+
    1. `employee_id` (str, primary key)
    2. `first_name` (str)
    3. `last_name` (str)
 
 2. Customer (Entity)
+
    1. `id` (int, primary key)
    2. `first_name` (str)
    3. `last_name` (str)
@@ -152,6 +154,7 @@ There are four (4) models included in the Sales API:
    5. `phone_number` (int)
 
 3. Sale (Entity)
+
    1. `id` (int, primary key)
    2. `automobile` (object, foreign key)
    3. `salesperson` (object, foreign key)
@@ -172,6 +175,46 @@ NOTE: The AutomobileVO gets the `vin` from the Inventory Automobile Information 
 5. Record a New Sale
 6. List All Sales
 7. Salesperson History
+
+## Price Prediction Microservice
+
+### The Price Prediction API
+
+The Price Prediction API comes with a RESTful endpoint to deploy the machine learning model:
+
+- Automobile Price Prediction: Provides a suggested price for a vehicle based on the input data.
+
+Sale API Base URL: `http://localhost:8070/`
+
+Port: 8070
+
+#### Automobile Price Prediction
+
+From Insomnia and your browser, you can access the price prediction endpoint at the following URL.
+
+| Action                 | Method | URL                                                 |
+| ---------------------- | ------ | --------------------------------------------------- |
+| Return suggested price | POST   | http://localhost:8070/api/automobile/predict-price/ |
+
+### Database Models
+
+There are two (2) models included in the Price Prediction API:
+
+1. SuggestedPrice (Entity)
+
+   1. `id` (int, primary key)
+   2. `automobile` (object, foreign key)
+   3. `created_at` (datetime)
+   4. `suggested_price` (float)
+
+2. AutomobileVO (Value Object)
+
+   1. `id` (int, primary key)
+   2. `vin` (str, unique)
+
+### Frontend Components
+
+1. Price an Automobile
 
 ## How to Run the Application
 
@@ -207,7 +250,6 @@ This should bring you to either a blank page if the docker containers are not lo
 
 Now you are ready to test the application through the React frontend. Start clicking on the navigation links in the green bar to start working with the application. Enjoy!
 
-
 ### Stopping the Containers
 
 From the terminal: Press `control+C` to stop the docker containers in the terminal session where the containers are running (MacOS)
@@ -219,4 +261,3 @@ Or you can stop the containers from the [Docker Desktop Application](https://www
 If you want to free up some space on your computer you can remove the containers with this command (make sure to stop them first):
 
     docker container prune -f
-

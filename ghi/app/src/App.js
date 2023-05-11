@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
-import Nav from './Nav';
+import Navigation from './Nav';
 import SalespersonForm from './SalespersonForm';
 import SalespeopleList from './SalespeopleList';
 import CustomerForm from './CustomerForm';
@@ -17,15 +17,15 @@ import ManufacturersList from './ManufacturersList';
 import ManufacturerForm from './ManufacturerForm';
 import VehicleModelList from './VehicleModelList';
 import VehicleModelForm from './VehicleModelForm';
-
-
 import AutomobilesList from './AutomobilesList';
 import AutomobileForm from './AutomobileForm';
+import PredictAutoPriceForm from './PredictAutoPriceForm';
+import Dashboard from './Dashboard';
 
 function App() {
     return (
         <BrowserRouter>
-            <Nav />
+            <Navigation />
             <div className="container">
                 <Routes>
                     <Route path="/" element={<MainPage />} />
@@ -40,6 +40,7 @@ function App() {
                     <Route path="automobiles">
                         <Route path="/automobiles" element={<AutomobilesList></AutomobilesList>} />
                         <Route path="create" element={<AutomobileForm />} />
+                        <Route path="price" element={<PredictAutoPriceForm />} />
                     </Route>
                     <Route path="salespeople">
                         <Route path="/salespeople" element={<SalespeopleList></SalespeopleList>} />
@@ -62,6 +63,9 @@ function App() {
                         <Route path="/appointments" element={<AppointmentsList></AppointmentsList>} />
                         <Route path="create" element={<AppointmentForm />} />
                         <Route path="history" element={<AppointmentsHistory />} />
+                    </Route>
+                    <Route path="dashboard">
+                        <Route path="/dashboard" element={<Dashboard></Dashboard>} />
                     </Route>
                 </Routes>
             </div>

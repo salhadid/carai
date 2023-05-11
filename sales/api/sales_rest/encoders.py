@@ -30,7 +30,11 @@ class SaleListEncoder(ModelEncoder):
 
     def get_extra_data(self, o):
         return {
-            "automobile": o.automobile.vin,
+            "automobile": {
+                "vin": o.automobile.vin,
+                "model_name": o.automobile.model_name,
+                "manufacturer_name": o.automobile.manufacturer_name,
+            },
             "salesperson": {
                 "first_name": o.salesperson.first_name,
                 "last_name": o.salesperson.last_name,

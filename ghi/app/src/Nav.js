@@ -1,74 +1,111 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
+import { Navbar, Nav } from 'react-bootstrap';
+import { NavDropdown } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Nav() {
-    return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-success">
-            <div className="container-fluid">
-                <NavLink className="navbar-brand" to="/">CarCar</NavLink>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/manufacturers">Manufacturers</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/manufacturers/create">Create a Manufacturer</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/models">Models</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/models/create">Create a Model</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/automobiles">Automobiles</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/automobiles/create">Create an Automobile</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/salespeople">Salespeople</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/salespeople/create">Add a Salesperson</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/customers">Customers</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/customers/create">Add a Customer</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/sales">Sales</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/sales/create">Add a Sale</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/sales/history">Salesperson History</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/technicians">Technicians</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/technicians/create">Add a Technician</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/appointments">Service Appointments</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/appointments/create">Add an Appointment</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/appointments/history">Service History</NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    )
+
+
+function Navigation() {
+
+	const noActiveStyle = {
+		backgroundColor: "transparent",
+		color: "black",
+	};
+
+	const navStyle = {
+		backgroundColor: "",
+		color: "white",
+		margin: 10,
+	};
+
+	return (
+		<Navbar bg="success" expand="lg" variant="dark">
+			<Navbar.Brand as={NavLink} to="/" style={navStyle}>
+				Car.ai
+			</Navbar.Brand>
+			<Navbar.Toggle aria-controls="navbarSupportedContent" />
+			<Navbar.Collapse id="navbarSupportedContent">
+				<Nav className="me-auto mb-2 mb-lg-0">
+					<NavDropdown title="Manufacturers" id="manufacturers-dropdown">
+						<NavDropdown.Item as={NavLink} to="/manufacturers" style={noActiveStyle}>
+							Manufacturers
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/manufacturers/create" style={noActiveStyle}>
+							Create a Manufacturer
+						</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Models" id="models-dropdown">
+						<NavDropdown.Item as={NavLink} to="/models" style={noActiveStyle}>
+							Models
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/models/create" style={noActiveStyle}>
+							Create a Model
+						</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Automobiles" id="automobiles-dropdown">
+						<NavDropdown.Item as={NavLink} to="/automobiles" style={noActiveStyle}>
+							Automobiles
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/automobiles/create" style={noActiveStyle}>
+							Create an Automobile
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/automobiles/price" style={noActiveStyle}>
+							Price an Automobile
+						</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Salespeople" id="salespeople-dropdown">
+						<NavDropdown.Item as={NavLink} to="/salespeople" style={noActiveStyle}>
+							Salespeople
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/salespeople/create" style={noActiveStyle}>
+							Add a Salesperson
+						</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Customers" id="customers-dropdown">
+						<NavDropdown.Item as={NavLink} to="/customers" style={noActiveStyle}>
+							Customers
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/customers/create" style={noActiveStyle}>
+							Add a Customer
+						</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Sales" id="sales-dropdown">
+						<NavDropdown.Item as={NavLink} to="/sales" style={noActiveStyle}>
+							Sales
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/sales/create" style={noActiveStyle}>
+							Add a Sale
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/sales/history" style={noActiveStyle}>
+							Salesperson History
+						</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Technicians" id="technicians-dropdown">
+						<NavDropdown.Item as={NavLink} to="/technicians" style={noActiveStyle}>
+							Technicians
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/technicians/create" style={noActiveStyle}>
+							Add a Technician
+						</NavDropdown.Item>
+					</NavDropdown>
+					<NavDropdown title="Service Appointments" id="appointments-dropdown">
+						<NavDropdown.Item as={NavLink} to="/appointments" style={noActiveStyle}>
+							Service Appointments
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/appointments/create" style={noActiveStyle}>
+							Add an Appointment
+						</NavDropdown.Item>
+						<NavDropdown.Item as={NavLink} to="/appointments/history" style={noActiveStyle}>
+							Service History
+						</NavDropdown.Item>
+					</NavDropdown>
+					<Nav.Link as={NavLink} to="/dashboard">
+						Dashboard
+					</Nav.Link>
+				</Nav>
+			</Navbar.Collapse>
+		</Navbar>
+	);
 }
 
-export default Nav;
+export default Navigation;

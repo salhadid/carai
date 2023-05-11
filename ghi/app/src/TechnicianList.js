@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 function TechnicianList() {
 
-    // initialize variables and state 
+    // initialize variables and state
     const [technicians, setTechnicians] = useState([]);
 
     // GET the list of technicians from the service API
@@ -17,7 +17,7 @@ function TechnicianList() {
         }
     };
 
-    // DELETE a single technician using their id 
+    // DELETE a single technician using their id
     const handleDelete = async (id) => {
         const url = `http://localhost:8080/api/technicians/${id}/`
         const fetchConfig = {
@@ -37,27 +37,30 @@ function TechnicianList() {
     }, []);
 
     return (
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th>Employee ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                {technicians.map(tech => {
-                    return (
-                        <tr key={tech.id}>
-                            <td>{tech.employee_id}</td>
-                            <td>{tech.first_name}</td>
-                            <td>{tech.last_name}</td>
-                            <td><button onClick={() => handleDelete(tech.id)}>Delete</button></td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
+        <div>
+            <h1>Technicians</h1>
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {technicians.map(tech => {
+                        return (
+                            <tr key={tech.id}>
+                                <td>{tech.employee_id}</td>
+                                <td>{tech.first_name}</td>
+                                <td>{tech.last_name}</td>
+                                <td><button onClick={() => handleDelete(tech.id)}>Delete</button></td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
 }
 

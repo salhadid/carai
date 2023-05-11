@@ -6,23 +6,19 @@ import json
 import requests
 
 sys.path.append("")
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sales_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ml_project.settings")
 django.setup()
 
 
-from sales_rest.models import AutomobileVO
+from ml_rest.models import AutomobileVO
 
 
 def get_automobiles():
     response = requests.get("http://project-beta-inventory-api-1:8000/api/automobiles/")
     content = json.loads(response.content)
     for automobile in content["autos"]:
-        print("model_name: ", automobile["model"]["name"])
-        print("manufacturer_name: ", automobile["model"]["manufacturer"]["name"])
         AutomobileVO.objects.update_or_create(
             vin=automobile["vin"],
-            model_name=automobile["model"]["name"],
-            manufacturer_name=automobile["model"]["manufacturer"]["name"],
             defaults={
                 "vin": automobile["vin"],
             },
@@ -31,7 +27,7 @@ def get_automobiles():
 
 def poll(repeat=True):
     while True:
-        print("Sales poller polling for data")
+        print("ML poller polling for data")
         try:
             get_automobiles()
         except Exception as e:

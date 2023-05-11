@@ -3,6 +3,8 @@ from django.db import models
 
 class AutomobileVO(models.Model):
     vin = models.CharField(unique=True, max_length=17)
+    model_name = models.CharField(max_length=100, null=True)
+    manufacturer_name = models.CharField(max_length=100, null=True)
 
 
 class Salesperson(models.Model):

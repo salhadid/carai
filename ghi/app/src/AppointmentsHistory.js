@@ -35,7 +35,7 @@ function AppointmentsHistory() {
 
     useEffect(() => {
         loadAppointments();
-    }, []);
+    }, [searchInput]);
 
     return (
         <div>
@@ -51,7 +51,6 @@ function AppointmentsHistory() {
                         id="header-search"
                         className="form-control"
                     />
-                    <button type="submit">Search</button>
                 </form>
             </div>
             <table className="table table-striped">

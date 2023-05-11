@@ -20,7 +20,7 @@ services:
       - beta-data:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service
+      - POSTGRES_MULTIPLE_DATABASES=inventory,sales,service,ml_service
       - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
@@ -95,4 +95,33 @@ services:
     environment:
       DATABASE_URL: postgres://sales:password@database:5432/sales
       WAIT_HOSTS: database:5432,sales-api:8000
+      WAIT_TIMEOUT: 240
+  ml-service-api:
+    build:
+      context: ./ml-service/api
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8070:8000"
+    volumes:
+      - ./ml-service/api:/app
+    depends_on:
+      - database
+    environment:
+      DATABASE_URL: postgres://ml_service:password@database:5432/ml_service
+      WAIT_HOSTS: database:5432
+      WAIT_TIMEOUT: 240
+  ml-service-poller:
+    build:
+      context: ./ml-service/poll
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./ml-service/poll:/app
+      - ./ml-service/api/ml_project:/app/ml_project
+      - ./ml-service/api/ml_rest:/app/ml_rest
+    depends_on:
+      - database
+      - ml-service-api
+    environment:
+      DATABASE_URL: postgres://ml_service:password@database:5432/ml_service
+      WAIT_HOSTS: database:5432,ml-service-api:8000
       WAIT_TIMEOUT: 240
